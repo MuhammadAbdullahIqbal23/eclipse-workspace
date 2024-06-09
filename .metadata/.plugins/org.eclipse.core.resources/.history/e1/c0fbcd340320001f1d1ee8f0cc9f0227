@@ -1,0 +1,63 @@
+package abdullah.springboot.controller;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import abdullah.springboot.entity.Case;
+import abdullah.springboot.service.CaseService;
+
+@RestController
+@RequestMapping("/api/cases")
+public class CaseController {
+
+    @Autowired
+    private CaseService caseService;
+
+    @GetMapping
+    public List<Case> retrieveAllCases() {
+        return caseService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Case> retrieveCase(@PathVariable Long id) {
+        Case caseFile = caseService.findOne(id);
+        if (caseFile == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(caseFile);
+    }
+
+    @PostMapping
+    public Case createCase(@RequestBody Case caseFile) {
+        caseFile.setType(caseService.assignRandomType());
+        return caseService.save(caseFile);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCase(@PathVariable Long id) throws Exception {
+        try {
+            caseService.deleteById(id);
+        } catch (Exception e) {
+            throw new Exception("Not found id: " + id);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Case> updateCase(@RequestBody Case caseFile, @PathVariable Long id) {
+        Case existingCase = caseService.findOne(id);
+        if (existingCase == null) {
+            throw new RuntimeException("Case not found with id: " + id);
+        }
+        caseFile.setId(id); // Ensure the ID in the request body matches the path variable
+        return ResponseEntity.ok(caseService.updateCase(caseFile));
+    }
+}

@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="hamd" class="i222504_G_LAB11_Task2.i222504_G_LAB11_Task2.Hamd">
+        <constructor-arg value="Mere Allah"/>
+        <constructor-arg value="Junaid Jamshaid"/>
+        <constructor-arg value="360"/>
+    </bean>
+
+    <bean id="naat" class="i222504_G_LAB11_Task2.i222504_G_LAB11_Task2.Naat">
+        <constructor-arg value="Muhammad Ka Roza"/>
+        <constructor-arg value="Junaid Jamshaid"/>
+        <constructor-arg value="381"/>
+    </bean>
+
+    <bean id="mp3Player" class="i222504_G_LAB11_Task2.i222504_G_LAB11_Task2.MP3Player">
+        <property name="kalaam" ref="hamd"/>
+    </bean>
+</beans>

@@ -1,0 +1,10 @@
+package i222504_G_LAB11.i222504_G_LAB11;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class Espresso extends Coffee {
+
+    public Espresso(String type, String size, double price) {
+        super(type, size, price);
+    }
+}

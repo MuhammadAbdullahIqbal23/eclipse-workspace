@@ -1,0 +1,145 @@
+package i222504_LAB2;
+
+import java.util.ArrayList;
+
+interface Product {
+    String getName();
+
+    int getPrice();
+
+    String getDescription();
+}
+
+class Electronics implements Product {
+    private String name;
+    private int price;
+    private String description;
+
+    public Electronics(String name, int price, String description) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+}
+
+class Clothing implements Product {
+    private String name;
+    private int price;
+    private String description;
+
+    public Clothing(String name, int price, String description) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+}
+
+class Books implements Product {
+    private String name;
+    private int price;
+    private String description;
+
+    public Books(String name, int price, String description) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+}
+
+interface Order {
+    void addProduct(Product product, int quantity);
+
+    void removeProduct(Product product, int quantity);
+
+    void calculateTotal();
+}
+
+class OnlineOrder implements Order {
+    private ArrayList<Product> products = new ArrayList<>();
+
+    public void addProduct(Product product, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            products.add(product);
+            System.out.println(product.getName() + " add to inventory");
+
+        }
+    }
+
+    public void removeProduct(Product product, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            if (products.contains(product)) {
+                products.remove(product);
+                System.out.println(product.getName() + " removed from inventory");
+            } else {
+                System.out.println("Product not found in the order.");
+            }
+        }
+    }
+
+    public void calculateTotal() {
+        int total = 0;
+        for (Product product : products) {
+            total += product.getPrice();
+        }
+        System.out.println("Total Price: " + total);
+    }
+}
+class Customer{
+	String name;
+	String email;
+	String address;
+	ArrayList<Order> orders = new <Order>();
+}
+
+public class i222504_LAB2_task3 {
+    public static void main(String[] args) {
+        Electronics electronicProduct = new Electronics("Laptop", 1200, "Powerful laptop for productivity.");
+        Clothing clothingProduct = new Clothing("T-shirt", 25, "Comfortable cotton T-shirt.");
+        Books bookProduct = new Books("Java Programming", 50, "Comprehensive guide to Java programming.");
+
+        OnlineOrder onlineOrder = new OnlineOrder();
+        onlineOrder.addProduct(electronicProduct, 2);
+        onlineOrder.addProduct(clothingProduct, 3);
+        onlineOrder.addProduct(bookProduct, 1);
+
+        onlineOrder.removeProduct(clothingProduct, 1);
+
+        onlineOrder.calculateTotal();
+    }
+}

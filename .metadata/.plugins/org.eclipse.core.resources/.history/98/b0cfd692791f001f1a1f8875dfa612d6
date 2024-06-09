@@ -1,0 +1,19 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Spring MVC CRUD Application</title>
+    <link rel="stylesheet" href="<c:url value='/resources/css/style.css'/>">
+</head>
+<body>
+    <h1>Welcome to the Spring MVC CRUD Application</h1>
+
+    <nav>
+        <ul>
+            <li><a href="<c:url value='/student/list'/>">List Students</a></li>
+            <li><a href="<c:url value='/student/add'/>">Add Student</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

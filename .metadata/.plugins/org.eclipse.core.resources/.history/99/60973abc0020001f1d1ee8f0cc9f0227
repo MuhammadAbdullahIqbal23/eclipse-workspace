@@ -1,0 +1,15 @@
+@RestController
+@RequestMapping("/avengers")
+public class AvengerController {
+    private AvengerService service;
+
+    @PostMapping("/register")
+    public Avenger registerAvenger(@RequestBody Avenger avenger) {
+        return service.registerAvenger(avenger);
+    }
+
+    @GetMapping("/mission/{missionId}")
+    public List<Avenger> getAvengersByMissionId(@PathVariable Long missionId) {
+        return service.getAvengersByMissionId(missionId);
+    }
+}

@@ -1,0 +1,432 @@
+package i222504_G_Lab_Sessional_Q2;
+
+import java.sql.*;
+import java.util.Scanner;
+
+public class i222504_Lab_Sessional_Q2 {
+	 public static void main(String[] args) {
+	        try {
+	            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Abdullah", "root", "abdullahabiiqbalabii54321100");
+	            Scanner scanner = new Scanner(System.in);
+	            int choice;
+
+	            do {
+	                System.out.println("\n----- Menu -----");
+	                System.out.println("1. Create Database");
+	                System.out.println("2. Create Patient Table");
+	                System.out.println("3. Create Doctor Table");
+	                System.out.println("4. Create Appointment Table");
+	                System.out.println("5. Insert Patient Data");
+	                System.out.println("6. Insert Doctor Data");
+	                System.out.println("7. Insert Appointment Data");
+	                System.out.println("8. Show All Patient Data");
+	                System.out.println("9. Show All Doctor Data");
+	                System.out.println("10. Show All Appointments");
+	                System.out.println("11. Update Patient Data");
+	                System.out.println("12. Update Doctor Data");
+	                System.out.println("13. Update Appointment Data");
+	                System.out.println("14. Delete Database");
+	                System.out.println("15. Delete Patient Table");
+	                System.out.println("16. Delete Doctor Table");
+	                System.out.println("17. Delete Appointment Table");
+	                System.out.println("18. Exit");
+	                System.out.print("Enter your choice: ");
+	                choice = scanner.nextInt();
+
+	                switch (choice) {
+	                    case 1:
+	                        createDatabase(connection);
+	                        break;
+	                    case 2:
+	                        createTableForPatient(connection);
+	                        break;
+	                    case 3:
+	                        createTableForDoctor(connection);
+	                        break;
+	                    case 4:
+	                        createTableForAppointment(connection);
+	                        break;
+	                    case 5:
+	                        insertPatientData(connection, scanner);
+	                        break;
+	                    case 6:
+	                        insertDoctorData(connection, scanner);
+	                        break;
+	                    case 7:
+	                        insertAppointmentData(connection, scanner);
+	                        break;
+	                    case 8:
+	                        showAllPatientData(connection);
+	                        break;
+	                    case 9:
+	                        showAllDoctorData(connection);
+	                        break;
+	                    case 10:
+	                        showAllAppointments(connection);
+	                        break;
+	                    case 11:
+	                        updatePatientData(connection, scanner);
+	                        break;
+	                    case 12:
+	                        updateDoctorData(connection, scanner);
+	                        break;
+	                    case 13:
+	                        updateAppointmentData(connection, scanner);
+	                        break;
+	                    case 14:
+	                        deleteDatabase(connection);
+	                        break;
+	                    case 15:
+	                        deleteTableForPatient(connection);
+	                        break;
+	                    case 16:
+	                        deleteTableForDoctor(connection);
+	                        break;
+	                    case 17:
+	                        deleteAppointmentTable(connection);
+	                        break;
+	                    case 18:
+	                        System.out.println("Exiting...");
+	                        break;
+	                    default:
+	                        System.out.println("Invalid choice. Please enter a number from 1 to 18.");
+	                }
+	            } while (choice != 18);
+
+	            connection.close();
+	            scanner.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+
+
+
+	public static void createDatabase(Connection c) throws SQLException {
+        
+        Statement statement = c.createStatement();
+        statement.executeUpdate("create database AppointmentManagement"); 
+        System.out.println("Database Created");
+		
+	}
+	
+	public static void createTableForPatient(Connection c) throws SQLException {
+        
+        Statement statement = c.createStatement();		
+        statement.executeUpdate("create table Patients(patient_ID int primary key auto_increment,name varchar(64),age int,contact_info varchar(64));"); 
+        System.out.println("Table for Patients created");
+		
+	}
+	public static void createTableForDoctor(Connection c) throws SQLException {
+        
+        Statement statement = c.createStatement();
+        statement.executeUpdate("create table Doctors( doctor_ID int primary key auto_increment, name varchar(64), Specialization varchar(64), contact_info varchar(64) );"); 
+        System.out.println("Table for Doctors created");
+		
+	}
+	public static void createTableForAppointment(Connection c) throws SQLException {
+            Statement statement = c.createStatement();
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS appointment (appointment_ID INT PRIMARY KEY AUTO_INCREMENT, patient_ID INT, doctor_ID INT, appointment_date DATE, appointment_time TIME, reason_for_visit TEXT, FOREIGN KEY (patient_ID) REFERENCES Patients(patient_ID), FOREIGN KEY (doctor_ID) REFERENCES Doctors(doctor_ID))");
+            statement.close();
+            System.out.println("Table for Appointment created");
+        
+    }
+	public static void insertPatientData(Connection c, Scanner scanner) throws SQLException {
+        System.out.print("Enter patient's name: ");
+        String name = scanner.next();
+
+        System.out.print("Enter patient's age: ");
+        int age = scanner.nextInt();
+
+        scanner.nextLine(); 
+
+        System.out.print("Enter patient's contact info: ");
+        String contactInfo = scanner.nextLine();
+
+            Statement statement = c.createStatement();
+            String query = String.format("INSERT INTO Patients (name, age, contact_info) VALUES ('%s', %d, '%s')", name, age, contactInfo);
+            statement.executeUpdate(query);
+           
+            System.out.println("Data inserted successfully");
+            statement.close();
+        
+    }
+	public static void insertDoctorData(Connection c, Scanner scanner) throws SQLException {
+        System.out.print("Enter doctor's name: ");
+        String name = scanner.next();
+
+        System.out.print("Enter doctor's specialization: ");
+        String specialization = scanner.next();
+
+        scanner.nextLine();
+
+        System.out.print("Enter doctor's contact info: ");
+        String contactInfo = scanner.nextLine();
+
+           Statement statement = c.createStatement();
+            String query = String.format("INSERT INTO Doctors (name, Specialization, contact_info) VALUES ('%s', '%s', '%s')", name, specialization, contactInfo);
+            statement.executeUpdate(query);
+           
+            System.out.println("Data inserted successfully");
+            statement.close();
+        
+    }
+	public static void insertAppointmentData(Connection c, Scanner scanner) throws SQLException {
+        System.out.print("Enter patient ID: ");
+        int patientId = scanner.nextInt();
+
+        System.out.print("Enter doctor ID: ");
+        int doctorId = scanner.nextInt();
+
+        System.out.print("Enter appointment date (YYYY-MM-DD): ");
+        String appointmentDate = scanner.next();
+
+        System.out.print("Enter appointment time (HH:MM:SS): ");
+        String appointmentTime = scanner.next();
+
+        scanner.nextLine(); 
+
+        System.out.print("Enter reason for visit: ");
+        String reasonForVisit = scanner.nextLine();
+
+          Statement statement = c.createStatement();
+            String query = String.format("INSERT INTO appointment (patient_ID, doctor_ID, appointment_date, appointment_time, reason_for_visit) VALUES (%d, %d, '%s', '%s', '%s')", patientId, doctorId, appointmentDate, appointmentTime, reasonForVisit);
+            int rowsAffected = statement.executeUpdate(query);
+            	if (rowsAffected > 0) {
+                System.out.println("Appointment data inserted successfully");
+            	}	
+            	else {
+                System.out.println("Failed to insert appointment data");
+            }
+            statement.close();
+       
+    }
+	public static void updatePatientData(Connection c, Scanner scanner) throws SQLException {
+        System.out.print("Enter patient ID to update: ");
+        int patientId = scanner.nextInt();
+
+        scanner.nextLine(); 
+
+        System.out.print("Enter new name: ");
+        String newName = scanner.nextLine();
+
+        System.out.print("Enter new age: ");
+        int newAge = scanner.nextInt();
+
+        scanner.nextLine(); 
+
+        System.out.print("Enter new contact info: ");
+        String newContactInfo = scanner.nextLine();
+
+        Statement statement = c.createStatement();
+        String query = String.format("UPDATE Patients SET name='%s', age=%d, contact_info='%s' WHERE patient_ID=%d", newName, newAge, newContactInfo, patientId);
+        int rowsAffected = statement.executeUpdate(query);
+        if (rowsAffected > 0) {
+            System.out.println("Patient data updated successfully");
+        } else {
+            System.out.println("Failed to update patient data. Patient ID not found.");
+        }
+        statement.close();
+    }
+
+    public static void updateDoctorData(Connection c, Scanner scanner) throws SQLException {
+        System.out.print("Enter doctor ID to update: ");
+        int doctorId = scanner.nextInt();
+
+        scanner.nextLine(); 
+
+        System.out.print("Enter new name: ");
+        String newName = scanner.nextLine();
+
+        System.out.print("Enter new specialization: ");
+        String newSpecialization = scanner.nextLine();
+
+        System.out.print("Enter new contact info: ");
+        String newContactInfo = scanner.nextLine();
+
+        Statement statement = c.createStatement();
+        String query = String.format("UPDATE Doctors SET name='%s', Specialization='%s', contact_info='%s' WHERE doctor_ID=%d", newName, newSpecialization, newContactInfo, doctorId);
+        int rowsAffected = statement.executeUpdate(query);
+        if (rowsAffected > 0) {
+            System.out.println("Doctor data updated successfully");
+        } else {
+            System.out.println("Failed to update doctor data. Doctor ID not found.");
+        }
+        statement.close();
+    }
+
+    public static void updateAppointmentData(Connection c, Scanner scanner) throws SQLException {
+        System.out.print("Enter appointment ID to update: ");
+        int appointmentId = scanner.nextInt();
+
+        scanner.nextLine(); 
+
+        System.out.print("Enter new appointment date (YYYY-MM-DD): ");
+        String newAppointmentDate = scanner.nextLine();
+
+        System.out.print("Enter new appointment time (HH:MM:SS): ");
+        String newAppointmentTime = scanner.nextLine();
+
+        System.out.print("Enter new reason for visit: ");
+        String newReasonForVisit = scanner.nextLine();
+
+        Statement statement = c.createStatement();
+        String query = String.format("UPDATE appointment SET appointment_date='%s', appointment_time='%s', reason_for_visit='%s' WHERE appointment_ID=%d", newAppointmentDate, newAppointmentTime, newReasonForVisit, appointmentId);
+        int rowsAffected = statement.executeUpdate(query);
+        if (rowsAffected > 0) {
+            System.out.println("Appointment data updated successfully");
+        } else {
+            System.out.println("Failed to update appointment data. Appointment ID not found.");
+        }
+        statement.close();
+    }
+	public static void showAllPatientData(Connection c) throws SQLException {
+		
+        Statement statement = c.createStatement();
+        
+        ResultSet resultSet = statement.executeQuery("select * from Patients");
+
+        System.out.println("Patient Information:");
+        System.out.println("ID\tName\tAge\tContact Info");
+
+        while (resultSet.next()) {
+        	int id = resultSet.getInt("patient_ID");
+            	String name = resultSet.getString("name");
+            int age = resultSet.getInt("age");
+            String contactInfo = resultSet.getString("contact_info");
+
+            		
+            System.out.println(id + "\t" + name + "\t" + age + "\t" + contactInfo);
+        }
+        
+        resultSet.close();
+       
+        
+        statement.close();
+    }
+	public static void showAllDoctorData(Connection c) throws SQLException {
+        	Statement statement = c.createStatement();
+             ResultSet resultSet = statement.executeQuery("SELECT * FROM Doctors");
+
+             System.out.println("Doctor Information:");
+            System.out.println("ID\tName\tSpecialization\tContact Info");
+
+            while (resultSet.next()) {
+               
+            	int id = resultSet.getInt("doctor_ID");
+                
+            	String name = resultSet.getString("name");
+                String specialization = resultSet.getString("Specialization");
+                String contactInfo = resultSet.getString("contact_info");
+
+                System.out.println(id + "\t" + name + "\t" + specialization + "\t" + contactInfo);
+            }
+
+            resultSet.close();
+            
+            statement.close();
+        
+    }
+    public static void showAllAppointments(Connection c) throws SQLException {
+            Statement statement = c.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM appointment");
+
+            System.out.println("Appointments:");
+            System.out.println("Appointment ID\tPatient ID\tDoctor ID\tDate\t\tTime\t\tReason");
+
+            while (resultSet.next()) {
+                int appointmentId = resultSet.getInt("appointment_ID");
+                int patientId = resultSet.getInt("patient_ID");
+                int doctorId = resultSet.getInt("doctor_ID");
+                Date appointmentDate = resultSet.getDate("appointment_date");
+                Time appointmentTime = resultSet.getTime("appointment_time");
+                String reasonForVisit = resultSet.getString("reason_for_visit");
+
+                System.out.println(appointmentId + "\t\t" + patientId + "\t\t" + doctorId + "\t\t" + appointmentDate + "\t" + appointmentTime + "\t" + reasonForVisit);
+            }
+
+            resultSet.close();
+            statement.close();
+        
+    }
+    public static void deletePatient(Connection c, Scanner scanner) throws SQLException {
+        System.out.print("Enter patient ID to delete: ");
+        int patientId = scanner.nextInt();
+
+        Statement statement = c.createStatement();
+        String query = String.format("DELETE FROM Patients WHERE patient_ID = %d", patientId);
+        int rowsAffected = statement.executeUpdate(query);
+        if (rowsAffected > 0) {
+            System.out.println("Patient data with ID " + patientId + " deleted successfully");
+        } else {
+            System.out.println("Failed to delete patient data. Patient ID not found.");
+        }
+        statement.close();
+    }
+    public static void deleteDoctor(Connection c, Scanner scanner) throws SQLException {
+        System.out.print("Enter doctor ID to delete: ");
+        int doctorId = scanner.nextInt();
+
+        Statement statement = c.createStatement();
+        String query = String.format("DELETE FROM Doctors WHERE doctor_ID = %d", doctorId);
+        int rowsAffected = statement.executeUpdate(query);
+        if (rowsAffected > 0) {
+            System.out.println("Doctor data with ID " + doctorId + " deleted successfully");
+        } else {
+            System.out.println("Failed to delete doctor data. Doctor ID not found.");
+        }
+        statement.close();
+    }
+
+    public static void deleteAppointment(Connection c, Scanner scanner) throws SQLException {
+        System.out.print("Enter appointment ID to delete: ");
+        int appointmentId = scanner.nextInt();
+
+        Statement statement = c.createStatement();
+        String query = String.format("DELETE FROM appointment WHERE appointment_ID = %d", appointmentId);
+        int rowsAffected = statement.executeUpdate(query);
+        if (rowsAffected > 0) {
+            System.out.println("Appointment data with ID " + appointmentId + " deleted successfully");
+        } else {
+            System.out.println("Failed to delete appointment data. Appointment ID not found.");
+        }
+        statement.close();
+    }
+	
+	public static void deleteTableForPatient(Connection c) throws SQLException {
+		Statement statement = c.createStatement();
+		statement.executeUpdate("drop table if exists Patients");
+		statement.close();
+		System.out.println("Patient Table Deleted");
+	}
+	public static void deleteTableForDoctor(Connection c) throws SQLException {
+            Statement statement = c.createStatement();
+            statement.executeUpdate("DROP TABLE IF EXISTS Doctors");
+            statement.close();
+            System.out.println("Doctor Table Deleted");
+        
+    }
+	public static void deleteAppointmentTable(Connection c) throws SQLException {
+            Statement statement = c.createStatement();
+            statement.executeUpdate("DROP TABLE IF EXISTS appointment");
+            statement.close();
+            System.out.println("Appointment Table Deleted");
+        
+    }
+	public static void deleteDatabase(Connection c) throws SQLException {
+		Statement statment = c.createStatement();
+		deleteAppointmentTable(c);
+		deleteTableForDoctor(c);
+		deleteTableForPatient(c);
+        statment.executeUpdate("drop database if exists AppointmentManagement");
+        statment.close();
+    	System.out.println("Database Deleted");
+	}
+
+	
+	
+	
+	
+	
+}

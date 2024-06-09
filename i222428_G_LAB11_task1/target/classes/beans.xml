@@ -1,0 +1,47 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+   
+   <bean id="espressosmall" class="i222504_G_LAB11_task1.i222504_G_LAB11_task1.Espresso">
+    <constructor-arg value="Espresso"/>
+    <constructor-arg value="Small"/>
+    <constructor-arg value="1.50"/>
+</bean>
+
+<bean id="espressomedium" class="i222504_G_LAB11_task1.i222504_G_LAB11_task1.Espresso">
+    <constructor-arg value="Espresso"/>
+    <constructor-arg value="Medium"/>
+    <constructor-arg value="2.49"/>
+</bean>
+
+<bean id="espressolarge" class="i222504_G_LAB11_task1.i222504_G_LAB11_task1.Espresso">
+    <constructor-arg value="Espresso"/>
+    <constructor-arg value="Large"/>
+    <constructor-arg value="2.99"/>
+</bean>
+
+<bean id="lattesmall" class="i222504_G_LAB11_task1.i222504_G_LAB11_task1.Latte">
+    <constructor-arg value="Latte"/>
+    <constructor-arg value="Small"/>
+    <constructor-arg value="2.49"/>
+</bean>
+
+<bean id="lattemedium" class="i222504_G_LAB11_task1.i222504_G_LAB11_task1.Latte">
+    <constructor-arg value="Latte"/>
+    <constructor-arg value="Medium"/>
+    <constructor-arg value="2.99"/>
+</bean>
+
+<bean id="lattelarge" class="i222504_G_LAB11_task1.i222504_G_LAB11_task1.Latte">
+    <constructor-arg value="Latte"/>
+    <constructor-arg value="Large"/>
+    <constructor-arg value="3.49"/>
+</bean>
+
+
+    <bean id="coffeeShop" class="i222504_G_LAB11_task1.i222504_G_LAB11_task1.CoffeeShop"/>
+
+</beans>

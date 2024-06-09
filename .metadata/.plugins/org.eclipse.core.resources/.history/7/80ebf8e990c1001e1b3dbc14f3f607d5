@@ -1,0 +1,14 @@
+package i222504_LAB2;
+
+public class LAB_2 {
+
+	public class Person
+	{
+		private string name;
+		private string address;
+		
+	}
+	
+}
+
+

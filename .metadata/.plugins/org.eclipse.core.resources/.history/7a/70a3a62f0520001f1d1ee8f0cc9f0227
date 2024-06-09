@@ -1,0 +1,48 @@
+public class Mission {
+    private Long id;
+    private String objective;
+    private String location;
+    private String threat;
+    
+    private List<Avenger> avengers;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getObjective() {
+        return objective;
+    }
+
+    public void setObjective(String objective) {
+        this.objective = objective;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getThreat() {
+        return threat;
+    }
+
+    public void setThreat(String threat) {
+        this.threat = threat;
+    }
+
+    public List<Avenger> getAvengers() {
+        return avengers;
+    }
+
+    public void setAvengers(List<Avenger> avengers) {
+        this.avengers = avengers;
+    }
+}

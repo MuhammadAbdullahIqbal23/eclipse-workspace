@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+    <title>Book List</title>
+    <style>
+	
+	 th, td {
+		border: 1px solid #dddddd;
+		padding: 8px;
+		border: 1px solid black;
+	}
+	        
+	        
+    </style>
+</head>
+<body>
+    <h1>Book List</h1>
+    <table id="bookTable">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Price</th>
+        </tr>
+    </table>
+    <script>
+        fetch('BookServlet')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('bookTable').innerHTML += data;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

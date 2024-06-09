@@ -1,0 +1,55 @@
+package i222504_LAB2;
+
+import java.util.ArrayList;
+
+public class i222504_LAB_2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+	class Person{
+		String name;
+		String address;
+		
+		public Person(String name, String address) {
+	        this.name = name;
+	        this.address = address;
+	    }
+		
+	}
+	class Student extends Person{
+		 ArrayList<String> Courses = new ArrayList<String>();
+		 ArrayList<int> Grades = new ArrayList<int>();
+		 int numberOfCourses = 0;
+		 
+		public Student(String name, String address) {
+	        super(name, address);
+	        this.Courses = new ArrayList<>();
+	    }
+		 public void addCourseWithGrade(String courseName, int grade) {
+			 if (Courses.size()<30) {
+				 if(Grades.size()<30) {
+					 Courses.add(numberOfCourses, courseName);
+					 Grades.add(numberOfCourses, grade);
+				 }
+			 }
+			 
+			 
+		 }
+		
+		
+		
+		
+	}
+	class Professor extends Person{
+
+		public Professor(String name, String address) {
+			super(name, address);
+			// TODO Auto-generated constructor stub
+		}
+		
+	}
+
+}
+

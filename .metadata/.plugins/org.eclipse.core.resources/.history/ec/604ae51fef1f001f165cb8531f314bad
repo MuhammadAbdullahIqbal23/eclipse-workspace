@@ -1,0 +1,31 @@
+package p123456_Q1;
+
+import java.io.*;
+
+public class p123456_q1 {
+    public static void main(String[] args) {
+        String dataToWrite = "This is a sample text to be copied from fileA.txt to fileB.txt.";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("fileA.txt"))) {
+            writer.write(dataToWrite);
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to fileA.txt: " + e.getMessage());
+        }
+
+        StringBuilder fileContent = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader("fileA.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                fileContent.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading from fileA.txt: " + e.getMessage());
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("fileB.txt"))) {
+            writer.write(fileContent.toString());
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to fileB.txt: " + e.getMessage());
+        }
+    }
+}

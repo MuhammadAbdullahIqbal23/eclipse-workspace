@@ -1,0 +1,32 @@
+package i222504_LAB2;
+import java.util.ArrayList;
+interface Product{
+	public String getName();
+	public int getPrice();
+	public String getDescription();
+	
+}
+public class i222504_LAB2_task3 {
+
+	public static void main(String[] args) {
+
+		
+	}
+	
+
+}
+class Electronics implements Products{
+	String name;
+	int Price;
+	String descriptions;
+	public String getname() {
+		return name;
+	}
+}
+
+class Customer{
+	String name;
+	String email;
+	String address;
+	
+}

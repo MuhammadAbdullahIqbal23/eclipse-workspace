@@ -1,0 +1,16 @@
+@RestController
+@RequestMapping("/missions")
+public class MissionController {
+    @Autowired
+    private MissionService service;
+
+    @PostMapping("/create")
+    public Mission createMission(@RequestBody Mission mission) {
+        return service.createMission(mission);
+    }
+
+    @GetMapping("/{id}")
+    public Mission getMissionById(@PathVariable Long id) {
+        return service.getMissionById(id);
+    }
+}

@@ -1,0 +1,11 @@
+package abdullah.springboot.dao;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import safi.springboot.entity.User;
+
+
+public interface UserDao extends JpaRepository<User, Integer> {
+
+
+}

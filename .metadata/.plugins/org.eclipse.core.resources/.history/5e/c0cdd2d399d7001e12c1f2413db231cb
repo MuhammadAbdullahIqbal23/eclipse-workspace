@@ -1,0 +1,20 @@
+package i222504_G_QUIZ1;
+
+import java.util.Scanner;
+
+public class i222504_G_QUIZ1 {
+public static void main(String[] args) {
+	
+	 System.out.println("Enter number of rows");
+	 Scanner n = new Scanner(System.in); 
+	int x = n.nextInt() ;
+	
+
+	for (int i = 0; i < x ;i++) {
+		for (int j = i ;i > 0 ;j--) {
+			System.out.println('*');
+		}
+	}
+
+	}
+}

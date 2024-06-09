@@ -1,0 +1,44 @@
+package abdullah.springboot.service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Random;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import abdullah.springboot.dao.CaseDao;
+import abdullah.springboot.entity.Case;
+import abdullah.springboot.entity.Case.CaseType;
+
+@Service
+public class UserService {
+
+    @Autowired
+    private CaseDao caseDao;
+
+    public List<Case> findAll() {
+        return caseDao.findAll();
+    }
+
+    public Case save(Case caseFile) {
+        return caseDao.save(caseFile);
+    }
+
+    public Case findOne(Long id) {
+        Optional<Case> caseOpt = caseDao.findById(id);
+        return caseOpt.orElse(null);
+    }
+
+    public void deleteById(Long id) {
+        caseDao.deleteById(id);
+    }
+
+    public Case updateCase(Case updatedCase) {
+        return caseDao.save(updatedCase);
+    }
+
+    public CaseType assignRandomType() {
+        CaseType[] types = CaseType.values();
+        return types[new Random().nextInt(types.length)];
+    }
+}

@@ -1,0 +1,24 @@
+@Service
+public class MissionService {
+    @Autowired
+    private MissionRepository repository;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    public Mission createMission(Mission mission) {
+        return repository.save(mission);
+    }
+
+    public Mission getMissionById(Long id) {
+        Mission mission = repository.findById(id).orElseThrow();
+        List<Avenger> avengers = restTemplate.exchange(
+            "http://ARS/avengers/mission/" + id, 
+            HttpMethod.GET, 
+            null, 
+            new ParameterizedTypeReference<List<Avenger>>() {}
+        ).getBody();
+        mission.setAvengers(avengers);
+        return mission;
+    }
+}

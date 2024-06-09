@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Professors</title>
+</head>
+<body>
+    <h2>Professors List</h2>
+   <table border="1" width="100%">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Course Code</th>
+        <th>Credits</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <c:forEach var="p" items="${list}">
+        <tr>
+            <td>${p.id}</td>
+            <td>${p.name}</td>
+            <td>${p.courseCode}</td>
+            <td>${p.credits}</td>
+            <td><a href="editprofessor/${p.id}">edit</a></td>
+            <td><a href="deleteprofessor/${p.id}">delete</a></td>
+        </tr>
+    </c:forEach>
+</table>
+<br/>  
+   <a href="empform">Add Professor</a>  
+</body>
+</html>

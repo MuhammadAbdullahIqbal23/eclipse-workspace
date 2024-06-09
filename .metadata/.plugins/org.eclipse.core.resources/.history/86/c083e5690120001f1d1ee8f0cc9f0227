@@ -1,0 +1,11 @@
+public class AvengerService {
+    private AvengerRepository repository;
+
+    public Avenger registerAvenger(Avenger avenger) {
+        return repository.save(avenger);
+    }
+
+    public List<Avenger> getAvengersByMissionId(Long missionId) {
+        return repository.findByMissionId(missionId);
+    }
+}

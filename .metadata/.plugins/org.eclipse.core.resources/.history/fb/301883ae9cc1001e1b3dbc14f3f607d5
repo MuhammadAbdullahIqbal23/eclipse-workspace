@@ -1,0 +1,87 @@
+package i222504_LAB2;
+import java.util.ArrayList;
+interface Product{
+	public String getName();
+	public int getPrice();
+	public String getDescription();
+	
+}
+class Electronics implements Product{
+	String name;
+	int Price;
+	String descriptions;
+	public String getName() {
+		
+		return name;
+	}
+	public int getPrice() {
+		return Price;
+	}
+	public String getDescription() {
+		
+		return descriptions;
+	}
+	
+}
+
+class Clothing implements Product{
+	String name;
+	int Price;
+	String descriptions;
+	public String getName() {
+		
+		return name;
+	}
+	public int getPrice() {
+		return Price;
+	}
+	public String getDescription() {
+		
+		return descriptions;
+	}
+	
+}
+class Books implements Product{
+	String name;
+	int Price;
+	String descriptions;
+	public String getName() {
+		
+		return name;
+	}
+	public int getPrice() {
+		return Price;
+	}
+	public String getDescription() {
+		
+		return descriptions;
+	}
+	
+}
+
+interface Order{
+	void addProducts(Product product,int quantity);
+	void removeProduct(Product product, int quantity)
+}
+
+
+
+
+public class i222504_LAB2_task3 {
+
+	public static void main(String[] args) {
+
+		
+	}
+	
+
+}
+
+
+
+class Customer{
+	String name;
+	String email;
+	String address;
+	
+}

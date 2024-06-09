@@ -1,0 +1,127 @@
+package i222504_LAB2;
+import java.util.ArrayList;
+interface Product{
+	public String getName();
+	public int getPrice();
+	public String getDescription();
+	
+}
+class Electronics implements Product{
+	String name;
+	int Price;
+	String descriptions;
+	public String getName() {
+		
+		return name;
+	}
+	public int getPrice() {
+		return Price;
+	}
+	public String getDescription() {
+		
+		return descriptions;
+	}
+	
+}
+
+class Clothing implements Product{
+	String name;
+	int Price;
+	String descriptions;
+	public String getName() {
+		
+		return name;
+	}
+	public int getPrice() {
+		return Price;
+	}
+	public String getDescription() {
+		
+		return descriptions;
+	}
+	
+}
+class Books implements Product{
+	String name;
+	int Price;
+	String descriptions;
+	public String getName() {
+		
+		return name;
+	}
+	public int getPrice() {
+		return Price;
+	}
+	public String getDescription() {
+		
+		return descriptions;
+	}
+	
+}
+
+interface Order{
+	public void addProduct(Product product,int quantity);
+	public 	void removeProduct(Product product, int quantity);
+	public void calculateTotal();
+}
+
+class OnlineOrder implements Order{
+	ArrayList<Product> products = new ArrayList<Product>();
+
+	
+	public void addProduct(Product product,int quantity) {
+		for (int i = 0; i < quantity;i++) {
+			products.add(product);
+		}
+	}
+	public 	void removeProduct(Product product, int quantity) {
+		for(int i = 0;i<quantity;i++) {
+			if(products.get(i)==product) {
+				products.remove(i);
+			}
+		}
+		
+	}
+	public void calculateTotal() {
+		int total=0;
+		for(Product i: products) {
+			total = total + i.getPrice();
+		}
+	}
+}
+
+
+public class i222504_LAB2_task3 {
+
+    public static void main(String[] args) {
+        // Create instances of products
+        Electronics electronicProduct = new Electronics();
+        electronicProduct.name = "Laptop";
+        electronicProduct.Price = 1200;
+        electronicProduct.descriptions = "Powerful laptop for productivity.";
+
+        Clothing clothingProduct = new Clothing();
+        clothingProduct.name = "T-shirt";
+        clothingProduct.Price = 25;
+        clothingProduct.descriptions = "Comfortable cotton T-shirt.";
+
+        Books bookProduct = new Books();
+        bookProduct.name = "Java Programming";
+        bookProduct.Price = 50;
+        bookProduct.descriptions = "Comprehensive guide to Java programming.";
+
+        // Create an instance of OnlineOrder
+        OnlineOrder onlineOrder = new OnlineOrder();
+
+        // Add products to the order
+        onlineOrder.addProduct(electronicProduct, 2);
+        onlineOrder.addProduct(clothingProduct, 3);
+        onlineOrder.addProduct(bookProduct, 1);
+
+        // Remove a product from the order
+        onlineOrder.removeProduct(clothingProduct, 1);
+
+        // Calculate and print the total
+        onlineOrder.calculateTotal();
+    }
+}

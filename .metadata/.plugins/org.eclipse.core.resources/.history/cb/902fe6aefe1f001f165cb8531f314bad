@@ -1,0 +1,12 @@
+public class Avenger {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private String alias;
+    private String superpowers;
+    private Long missionId;
+
+    // Getters and Setters
+    
+}
